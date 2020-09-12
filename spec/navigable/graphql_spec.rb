@@ -1,6 +1,6 @@
-RSpec.describe Navigable::HTTP do
+RSpec.describe Navigable::GraphQL do
   it "has a version number" do
-    expect(Navigable::HTTP::VERSION).not_to be nil
+    expect(Navigable::GraphQL::VERSION).not_to be nil
   end
 
   it "does something useful" do

@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
 module Navigable
-  module HTTP
+  module GraphQL
     class InvalidResponse < StandardError; end
 
     class Response

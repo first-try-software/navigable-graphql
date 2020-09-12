@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "navigable/http"
+require "navigable/graphql"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

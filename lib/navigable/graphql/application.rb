@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
 module Navigable
-  module HTTP
+  module GraphQL
     class Application
       def call(env)
         router.call(env)

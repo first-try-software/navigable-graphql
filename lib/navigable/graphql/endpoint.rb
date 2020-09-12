@@ -1,14 +1,14 @@
 # frozen-string-literal: true
 
 module Navigable
-  module HTTP
+  module GraphQL
     module Endpoint
       def self.extended(base)
         base.extend(Navigable::Resolver)
 
         base.instance_eval do
           def responds_to(verb, path)
-            Navigable::HTTP.add_endpoint(verb: verb, path: path, endpoint_class: self)
+            Navigable::GraphQL.add_endpoint(verb: verb, path: path, endpoint_class: self)
           end
 
           def executes(command_key)

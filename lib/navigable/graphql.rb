@@ -6,20 +6,20 @@ require 'rack/bodyparser'
 require 'hanami/router'
 require 'json'
 
-require "navigable/http/version"
-require 'navigable/http/application'
-require 'navigable/http/response'
-require 'navigable/http/headers'
-require 'navigable/http/params'
-require 'navigable/http/request'
-require 'navigable/http/rack_request_adapter'
-require 'navigable/http/serializer'
-require 'navigable/http/null_serializer'
-require 'navigable/http/error'
-require 'navigable/http/endpoint'
+require "navigable/graphql/version"
+require 'navigable/graphql/application'
+require 'navigable/graphql/response'
+require 'navigable/graphql/headers'
+require 'navigable/graphql/params'
+require 'navigable/graphql/request'
+require 'navigable/graphql/rack_request_adapter'
+require 'navigable/graphql/serializer'
+require 'navigable/graphql/null_serializer'
+require 'navigable/graphql/error'
+require 'navigable/graphql/endpoint'
 
 module Navigable
-  module HTTP
+  module GraphQL
     def self.application
       @application ||= Rack::Builder.new(app) do
         use Rack::BodyParser, :parsers => { 'application/json' => proc { |data| JSON.parse(data) } }

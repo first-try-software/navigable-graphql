@@ -1,7 +1,7 @@
 # frozen-string-literal: true
 
 module Navigable
-  module HTTP
+  module GraphQL
     module Serializer
       TYPE = :__serializer__
       TO_JSON_NOT_IMPLEMENTED_MESSAGE = 'Class must implement `to_json` method.'
