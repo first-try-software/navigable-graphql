@@ -13,6 +13,8 @@ module Navigable
         [form_params, body_params, url_params].reduce(&:merge)
       end
 
+      private
+
       def form_params
         @form_params ||= symbolize_keys(Rack::Request.new(env).params || {})
       end

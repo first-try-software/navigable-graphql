@@ -1,18 +1,54 @@
-# frozen-string-literal: true
-
 module Navigable
   module GraphQL
     class Request
-      def initialize(env = nil)
-        @env = env
+      attr_reader :params
+
+      def initialize(params)
+        @params = params
       end
 
-      def headers
-        @headers ||= @env ? Headers.new(@env).to_h : {}
+      def execute
+        app_schema.execute(
+          query,
+          variables: processed_variables,
+          context: context,
+          operation_name: operation_name
+        )
       end
 
-      def params
-        @params ||= @env ? Params.new(@env).to_h : {}
+      private
+
+      def schema
+        Navigable::GraphQL::Schema.app_schema
+      end
+
+      def query
+        params[:query]
+      end
+
+      def processed_variables
+        return {} if variables.nil? || variables.empty?
+
+        case variables
+        when String
+          JSON.parse(variables) || {}
+        when Hash
+          variables
+        else
+          raise ArgumentError, "Unexpected parameter: #{variables}"
+        end
+      end
+
+      def variables
+        params[:variables]
+      end
+
+      def context
+        {}
+      end
+
+      def operation_name
+        params[:operationName]
       end
     end
   end

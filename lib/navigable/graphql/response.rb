@@ -1,10 +1,11 @@
-# frozen-string-literal: true
-
 module Navigable
   module GraphQL
     class InvalidResponse < StandardError; end
 
     class Response
+      HEADERS = { 'Content-Type' => 'application/json' }.freeze
+      EMPTY_CONTENT = ''
+
       attr_reader :params, :status
 
       def initialize(params)
@@ -13,25 +14,13 @@ module Navigable
       end
 
       def to_rack_response
-        [status, headers, content]
+        [status, HEADERS, content]
       end
 
       private
 
-      def headers
-        headers = params[:headers] || {}
-        headers['Content-Type'] = content_type if content_type
-        headers
-      end
-
-      def content_type
-        return 'application/json' if json
-        return 'text/html' if html
-        return 'text/plain' if text
-      end
-
       def content
-        [json || html || text || body || ""]
+        [json || EMPTY_CONTENT]
       end
 
       def json
@@ -39,18 +28,6 @@ module Navigable
         return params[:json].to_s if valid_json?(params[:json])
 
         params[:json].to_json
-      end
-
-      def html
-        params[:html]
-      end
-
-      def text
-        params[:text]
-      end
-
-      def body
-        params[:body]
       end
 
       def valid_json?(json)
