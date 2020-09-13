@@ -23,10 +23,10 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency 'graphql', '~> 1.11'
   spec.add_dependency 'hanami-router', '= 2.0.0.alpha3'
   spec.add_dependency 'json', '~> 2.3'
   spec.add_dependency 'navigable', '~> 0.2'
   spec.add_dependency 'rack', '~> 2.2'
   spec.add_dependency 'rack-bodyparser', '~> 1.0'
-  spec.add_dependency 'graphql', '~> 1.11'
 end

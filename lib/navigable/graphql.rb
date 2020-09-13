@@ -9,9 +9,11 @@ require 'navigable/graphql/application'
 require 'navigable/graphql/response'
 require 'navigable/graphql/params'
 require 'navigable/graphql/request'
-require 'navigable/graphql/rack_request_adapter'
-require 'navigable/graphql/error'
-require 'navigable/graphql/endpoint'
+require 'navigable/graphql/rack_adapter'
+require 'navigable/graphql/basic_resolver'
+require 'navigable/graphql/mutation'
+require 'navigable/graphql/query'
+require 'navigable/graphql/schema'
 
 module Navigable
   module GraphQL

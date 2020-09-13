@@ -8,7 +8,7 @@ module Navigable
       end
 
       def execute
-        app_schema.execute(
+        schema.execute(
           query,
           variables: processed_variables,
           context: context,
