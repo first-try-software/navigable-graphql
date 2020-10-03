@@ -1,5 +1,12 @@
+require 'simplecov'
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
 require "bundler/setup"
 require "navigable/graphql"
+
+Dir[File.join(__dir__, 'support', '**', '*.rb')].each { |file| require file }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

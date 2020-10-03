@@ -11,12 +11,18 @@ module Navigable
 
       module InstanceMethods
         def resolve(**kwargs)
-          @result = Navigable::Dispatcher.dispatch(
-            self.class.instance_variable_get(:@command_key),
-            params: kwargs,
-            resolver: BasicResolver.new
-          )
+          @result = Navigable::Dispatcher.dispatch(command_key, params: kwargs) if command_key
           super
+        end
+
+        private
+
+        def result
+          @result
+        end
+
+        def command_key
+          self.class.instance_variable_get(:@command_key)
         end
       end
     end

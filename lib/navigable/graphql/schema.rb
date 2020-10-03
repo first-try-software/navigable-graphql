@@ -2,11 +2,11 @@ module Navigable
   module GraphQL
     module Schema
       def self.extended(base)
-        @app_schema = base
+        @schema = base
       end
 
-      def self.app_schema
-        @app_schema
+      def self.schema
+        @schema
       end
     end
   end

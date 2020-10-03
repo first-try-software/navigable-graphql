@@ -1,13 +1,19 @@
+# frozen-string-literal: true
+
 module Navigable
   module GraphQL
-    class Request
-      attr_reader :params
+    class Endpoint
+      extend Navigable::Server::Endpoint
 
-      def initialize(params)
-        @params = params
-      end
+      responds_to :post, '/graphql'
 
       def execute
+        { status: 200, json: json }
+      end
+
+      private
+
+      def json
         schema.execute(
           query,
           variables: processed_variables,
@@ -16,22 +22,24 @@ module Navigable
         )
       end
 
-      private
-
       def schema
-        Navigable::GraphQL::Schema.app_schema
+        Navigable::GraphQL::Schema.schema
       end
 
       def query
-        params[:query]
+        request.params[:query]
       end
 
       def processed_variables
-        return {} if variables.nil? || variables.empty?
+        return {} if variables.nil?
 
         case variables
         when String
-          JSON.parse(variables) || {}
+          begin
+            JSON.parse(variables)
+          rescue JSON::ParserError
+            {}
+          end
         when Hash
           variables
         else
@@ -40,7 +48,7 @@ module Navigable
       end
 
       def variables
-        params[:variables]
+        request.params[:variables]
       end
 
       def context
@@ -48,7 +56,7 @@ module Navigable
       end
 
       def operation_name
-        params[:operationName]
+        request.params[:operationName]
       end
     end
   end
