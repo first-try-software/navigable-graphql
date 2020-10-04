@@ -31,20 +31,11 @@ module Navigable
       end
 
       def processed_variables
-        return {} if variables.nil?
+        parsed_variables.is_a?(Hash) ? parsed_variables : {}
+      end
 
-        case variables
-        when String
-          begin
-            JSON.parse(variables)
-          rescue JSON::ParserError
-            {}
-          end
-        when Hash
-          variables
-        else
-          raise ArgumentError, "Unexpected parameter: #{variables}"
-        end
+      def parsed_variables
+        @parsed_variables ||= JSON.parse(variables) rescue variables
       end
 
       def variables

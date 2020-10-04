@@ -102,13 +102,5 @@ RSpec.describe Navigable::GraphQL::Endpoint do
           )
       end
     end
-
-    context 'when variables are a NOT a string or hash' do
-      let(:variables) { ['Ahoy!'] }
-
-      it 'raises an argument error' do
-        expect { execute }.to raise_error(ArgumentError)
-      end
-    end
   end
 end
